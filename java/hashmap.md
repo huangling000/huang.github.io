@@ -207,5 +207,6 @@ public V get(Object key) {
     }    
 ```
 
-**重写equal方法需同时重写hashcode方法**
+**重写equal方法需同时重写hashcode方法，为什么？**
 
+在将自定义的对象作为key存放入hashmap的过程中，需要使用key的hashcode函数得到hashcode，再用hashcode对进行hash（）计算和forindex计算，如果不重写hashcode方法，那么对象的hashcode方法则继承Object类的hashcode方法，即返回这个对象的内存地址。两个即使值相同的对象，但是它们的内存地址一定是不相同的，那么我们想通过对象的值进行一致性的判定，那么不重写的话，相同值的对象的hashcode不同，也不能存放在同一个bucket下，也就不可能通过与一个对象有相同值的另一个对象来获取该对象的内容。equals方法如果不重写，也将继承Object类的equals方法，是根据两个对象的内存地址进行判断。
